@@ -2,8 +2,10 @@
 
 {% load staticfiles %}
 
-<!-- javascript files -->
-<script src="{% static 'hot_answers/js/zhihu_img.js' %}"></script> 
+{% block head %}
+    <!-- javascript files -->
+    <script src="{% static 'hot_answers/js/zhihu_img.js' %}"></script> 
+{% endblock %}
 
 {%block title %} {{ answer.question }} {% endblock %}
 
