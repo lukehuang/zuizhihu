@@ -1,0 +1,28 @@
+.origin_image {
+    max-width: 100%;
+    height: auto;
+    margin: 6px 0;
+    display: block;
+    overflow: hidden;
+}
+
+.weixin {
+    height: 20%;
+    width: 20%;
+  }
+
+.github {
+    height: 2em;
+    width: 2em;
+  }
+
+.inline-img {
+    float: left;
+    max-height: 100px;
+    max-width: 100px;
+    margin: 4px 10px 5px 0;
+  }
+
+.full-text-link {
+  margin-bottom: 10px;
+}

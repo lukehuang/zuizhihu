@@ -1,0 +1,31 @@
+{% extends "hot_answers/base.html" %}
+
+{% load staticfiles %}
+
+{%block title %} {{ answer.question }} {% endblock %}
+
+{% block nav %}
+    <li><a href="{% url 'hot_answers:index' %}">首页</a></li>
+    <li><a href="{% url 'hot_answers:about' %}">关于最知乎</a></li>
+{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h3><a href="{{ answer.question_link }}" target="_blank">{{ answer.question }}</a></h3>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                作者: <a href="{{ answer.author_link }}" target="_blank"><u>{{ answer.author }}</u></a>，
+                {{ answer.vote }}人赞同
+            </h3>
+        </div>
+        
+        <div class="panel-body">
+            {{ answer.answer|safe|escape }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block side_block %}{% endblock %}

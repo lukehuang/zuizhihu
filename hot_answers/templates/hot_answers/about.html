@@ -1,0 +1,20 @@
+{% extends "hot_answers/base.html" %}
+
+{% load staticfiles %}
+
+{%block title %}关于{% endblock %}
+
+{% block nav %}
+    <li><a href="{% url 'hot_answers:index' %}">首页</a></li>
+    <li class="active"><a href="{% url 'hot_answers:about' %}">关于最知乎</a></li>
+{% endblock %}
+
+{% block body_block %}
+    <h1 class="page-header">最知乎</h1>
+    <p>最知乎主要收集知乎上赞同数在1000以上的高票答案，每日更新，让你不再需要手动“刷”知乎。</p>
+    <p>爬虫源码请见: <a href="https://github.com/naity/zhihu_scraper" target="_blank"><img src="{% static 'hot_answers/images/github.png' %}" class="github" alt="GItHub"></a>
+    <p>如果你有任何问题或建议，请加微信：</p>
+    <img  src="{% static 'hot_answers/images/weixin.JPG' %}" class="weixin" alt="naibanaima">
+{% endblock %}
+
+{% block side_block %}{% endblock %}

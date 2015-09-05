@@ -1,0 +1,68 @@
+{% extends "hot_answers/base.html" %}
+
+{% load staticfiles %}
+
+{%block title %}首页{% endblock %}
+
+{% block nav %}
+    <li class="active"><a href="{% url 'hot_answers:index' %}">首页</a></li>
+    <li><a href="{% url 'hot_answers:about' %}">关于最知乎</a></li>
+{% endblock %}
+
+{% block body_block %}
+    <div class="col-xs-12 col-sm-9">
+        <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+        </p>
+        <div class="jumbotron">
+            <h2>最知乎 - The Best of Zhihu</h2>
+            <p class="lead">每天为你送上知乎上的热门高票答案</p>
+        </div>
+        {% if answers %}
+            <div class="row">
+                {% for answer in answers %}
+                    <div class="col-xs-6 col-lg-4">
+                        <div class="thumbnail">
+                            <h4><a href="{% url 'hot_answers:answer' answer.answer_id %}">{{ answer.question }}</a></h4>
+                            <p>{{ answer.summary_img|safe|escape }}<span class="glyphicon glyphicon-thumbs-up"></span><strong>{{ answer.vote }}</strong><span style="margin: 0 1em"> {{ answer.summary_text }}</span></p>
+                            <p><a class="btn btn-primary full-text-link" href="{% url 'hot_answers:answer' answer.answer_id %}" role="button" target="_blank">阅读全文&raquo;</a></p>
+                        </div>
+                    </div><!--/.col-xs-6.col-lg-4-->
+                {% endfor %}
+            </div><!--/row-->
+          
+            <nav>
+                <ul class="pager">
+                    {% if answers.has_previous %}
+                        <li><a href="?page={{ answers.previous_page_number }}&range={{ range }}">上一页</a></li>
+                    {% endif %}
+                    {{ answers.number }} / {{ answers.paginator.num_pages }}
+                    {% if answers.has_next %}
+                        <li><a href="?page={{ answers.next_page_number }}&range={{ range }}">下一页</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <strong>对不起！</strong>
+                目前还没有更新...
+            </div>
+        {% endif %}
+      
+    </div><!--/.col-xs-12.col-sm-9-->
+{% endblock %}
+
+{% block side_block %}
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+  <div class="list-group">
+    <a href="?range=all" class="list-group-item {% if range == 'all' %}active{% endif %}">所有答案</a>
+    <a href="?range=today" class="list-group-item {% if range == 'today' %}active{% endif %}">本日更新</a>
+    <a href="?range=week" class="list-group-item {% if range == 'week' %}active{% endif %}">本周更新</a>
+    <a href="?range=month" class="list-group-item {% if range == 'month' %}active{% endif %}">本月更新</a>
+    <a href="?range=year" class="list-group-item {% if range == 'year' %}active{% endif %}">本年更新</a>
+  </div>
+</div><!--/.sidebar-offcanvas-->
+{% endblock %}
