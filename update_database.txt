@@ -1,0 +1,4 @@
+Use these two commands to update database
+
+pg_dump -Fc -U "yuantian" -w "zhihu_db" -f "zhihu_db".dmp
+heroku pg:backups restore 'https://s3-us-west-2.amazonaws.com/zhihudb/zhihu_db.dump' DATABASE_URL
