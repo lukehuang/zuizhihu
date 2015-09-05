@@ -26,7 +26,7 @@
         {% if answers %}
             <div class="row">
                 {% for answer in answers %}
-                    <div class="col-xs-6 col-lg-4">
+                    <div class="col-xs-12 col-lg-4">
                         <div class="thumbnail">
                             <h4><a href="{% url 'hot_answers:answer' answer.answer_id %}">{{ answer.question }}</a></h4>
                             <p>{{ answer.summary_img|safe|escape }}<span class="glyphicon glyphicon-thumbs-up"></span><strong>{{ answer.vote }}</strong><span style="margin: 0 1em"> {{ answer.summary_text }}</span></p>
