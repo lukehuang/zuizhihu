@@ -57,6 +57,12 @@ class IndexView(generic.ListView):
             answer_list = answer_list.filter(date__gte=this_year,
                                              date__lt=next_year)
 
+        # whether order by vote
+        self.order_by = self.request.GET.get("order_by", "date")
+
+        if self.order_by == "vote":
+            answer_list = answer_list.order_by('-vote', '-answer_id')
+
         # use Django's Paginator to display 6 answers per page
         paginator = Paginator(answer_list, 6)
 
@@ -74,8 +80,9 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
 
-        # add time filter info
+        # add time filter and order_by info
         context["range"] = self.range
+        context["order_by"] = self.order_by
 
         return context
 

@@ -23,13 +23,14 @@
             <h2>最知乎 - The Best of Zhihu</h2>
             <p class="lead">每天为你送上知乎上的热门高票答案</p>
         </div>
+
         {% if answers %}
             <div class="row">
                 {% for answer in answers %}
                     <div class="col-xs-12 col-lg-4">
-                        <div class="thumbnail">
+                        <div class="thumbnail thumbnail-text">
                             <h4><a href="{% url 'hot_answers:answer' answer.answer_id %}">{{ answer.question }}</a></h4>
-                            <p>{{ answer.summary_img|safe|escape }}<span class="glyphicon glyphicon-thumbs-up"></span><strong>{{ answer.vote }}</strong><span style="margin: 0 1em"> {{ answer.summary_text }}</span></p>
+                            <p>{{ answer.summary_img|safe|escape }}<span class="glyphicon glyphicon-thumbs-up"></span><strong>{{ answer.vote }}</strong><span style="margin-left: 1em"> {{ answer.summary_text }}</span></p>
                             <p><a class="btn btn-primary full-text-link" href="{% url 'hot_answers:answer' answer.answer_id %}" role="button" target="_blank">阅读全文&raquo;</a></p>
                         </div>
                     </div><!--/.col-xs-6.col-lg-4-->
@@ -39,11 +40,11 @@
             <nav>
                 <ul class="pager">
                     {% if answers.has_previous %}
-                        <li><a href="?page={{ answers.previous_page_number }}&range={{ range }}">上一页</a></li>
+                        <li><a href="?page={{ answers.previous_page_number }}&range={{ range }}&order_by={{ order_by }}">上一页</a></li>
                     {% endif %}
                     {{ answers.number }} / {{ answers.paginator.num_pages }}
                     {% if answers.has_next %}
-                        <li><a href="?page={{ answers.next_page_number }}&range={{ range }}">下一页</a></li>
+                        <li><a href="?page={{ answers.next_page_number }}&range={{ range }}&order_by={{ order_by }}">下一页</a></li>
                     {% endif %}
                 </ul>
             </nav>
@@ -68,6 +69,7 @@
     <a href="?range=week" class="list-group-item {% if range == 'week' %}active{% endif %}">本周更新</a>
     <a href="?range=month" class="list-group-item {% if range == 'month' %}active{% endif %}">本月更新</a>
     <a href="?range=year" class="list-group-item {% if range == 'year' %}active{% endif %}">本年更新</a>
+    <a href="?range={{ range }}&order_by=vote" class="list-group-item {% if order_by == 'vote' %}active{% endif %}">按赞同数浏览</a>
   </div>
 </div><!--/.sidebar-offcanvas-->
 {% endblock %}
