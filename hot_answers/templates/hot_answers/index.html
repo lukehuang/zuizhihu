@@ -7,7 +7,7 @@
     <script src="{% static 'hot_answers/js/zhihu_img.js' %}"></script> 
 {% endblock %}
 
-{%block title %}首页{% endblock %}
+{%block title %}每天为你送上知乎上的热门高票答案{% endblock %}
 
 {% block nav %}
     <li class="active"><a href="{% url 'hot_answers:index' %}">首页</a></li>
@@ -39,6 +39,7 @@
           
             <nav>
                 <ul class="pager">
+                    <li><a href="?page=1&range={{ range }}&order_by={{ order_by }}">首页</a></li>
                     {% if answers.has_previous %}
                         <li><a href="?page={{ answers.previous_page_number }}&range={{ range }}&order_by={{ order_by }}">上一页</a></li>
                     {% endif %}
@@ -46,6 +47,7 @@
                     {% if answers.has_next %}
                         <li><a href="?page={{ answers.next_page_number }}&range={{ range }}&order_by={{ order_by }}">下一页</a></li>
                     {% endif %}
+                     <li><a href="?page={{ last_page }}&range={{ range }}&order_by={{ order_by }}">尾页</a></li>
                 </ul>
             </nav>
 

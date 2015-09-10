@@ -66,6 +66,9 @@ class IndexView(generic.ListView):
         # use Django's Paginator to display 6 answers per page
         paginator = Paginator(answer_list, 6)
 
+        # last page
+        self.last_page = paginator.num_pages
+
         page = self.request.GET.get("page", 1)
 
         try:
@@ -73,7 +76,7 @@ class IndexView(generic.ListView):
         except PageNotAnInteger:
             answers = paginator.page(1)
         except EmptyPage:
-            answers = paginator.page(paginator.num_pages)
+            answers = paginator.page(self.last_page)
 
         return answers
 
@@ -83,6 +86,7 @@ class IndexView(generic.ListView):
         # add time filter and order_by info
         context["range"] = self.range
         context["order_by"] = self.order_by
+        context["last_page"] = self.last_page
 
         return context
 

@@ -1,4 +1,4 @@
 Use these two commands to update database
 
-pg_dump -Fc --no-acl --no-owner -h localhost -U yuantian zhihu_db > zhihu_db.dump
-heroku pg:backups restore 'https://s3-us-west-2.amazonaws.com/zhihudb/zhihu_db.dump' DATABASE_URL
+pg_dump -Fc --no-acl --no-owner -h localhost -U yuantian zhihu_db > zhihu_db_09_08_2015.dump
+heroku pg:backups restore 'https://s3-us-west-2.amazonaws.com/zhihudb/zhihu_db_09_08_2015.dump' DATABASE_URL
