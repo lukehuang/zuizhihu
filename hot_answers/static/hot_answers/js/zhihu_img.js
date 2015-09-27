@@ -1,14 +1,9 @@
 function addPrefix(group) {
     group.each(function() {
-        var src;
-        
         if ($(this).attr("src").substring(0, 6) != "https:") {
-            src = "http:" + $(this).attr("src");
-        } else {
-            src = "http:" + $(this).attr("src").substring(6);
+            var src = "https:" + $(this).attr("src");
+            $(this).attr("src", src);
         }
-
-        $(this).attr("src", src);
     });
 }
 
